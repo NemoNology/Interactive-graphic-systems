@@ -1,4 +1,3 @@
-using System.Reflection.Metadata;
 using OpenTK.Graphics.OpenGL;
 
 namespace Console_Project
@@ -71,6 +70,17 @@ namespace Console_Project
             GL.DeleteProgram(ShaderProgramHandler);
             GC.SuppressFinalize(this);
         }
+
+        public static Shader From(string vertexShaderFileName, string fragmentShaderFileName)
+        {
+            return new Shader(
+                Path.Combine(Shader.ShaderSourcesPath, vertexShaderFileName),
+                Path.Combine(Shader.ShaderSourcesPath, fragmentShaderFileName)
+                );
+        } 
+
+        public static Shader DefaultShader =>
+            Shader.From("shader.vert", "shader.frag");
 
         ~Shader()
         {

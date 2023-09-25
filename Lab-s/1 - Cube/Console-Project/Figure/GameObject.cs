@@ -8,13 +8,12 @@ namespace Console_Project
         readonly Figure Figure;
         int VertexBufferHandler,
             VertexArrayHandler,
-            ElementBufferHandler,
-            ShaderProgrammHandler;
+            ElementBufferHandler;
 
-        public GameObject(Figure figure, int shaderProgrammHandler)
+        public GameObject(Figure figure)
         {
             Figure = figure;
-            ShaderProgrammHandler = shaderProgrammHandler;
+            Init();
         }
 
         /// <summary>
@@ -26,14 +25,11 @@ namespace Console_Project
             var vertices = Figure.VerticesCoordinates;
             var indices = Figure.Indices;
 
-            (VertexBufferHandler, VertexArrayHandler) = OpenGLExtensions.CreateVBOandVAO(
-                vertices,
-                bufferUsageHint
-            );
+            (VertexBufferHandler, 
+            VertexArrayHandler, 
+            ElementBufferHandler) = 
+                OpenGLExtensions.InitGameObjectByFigure(Figure);
 
-            ElementBufferHandler = OpenGLExtensions.CreateEBO(indices, bufferUsageHint);
-
-            GL.UseProgram(ShaderProgrammHandler);
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
         }
 
@@ -42,7 +38,6 @@ namespace Console_Project
         /// </summary>
         public void Draw()
         {
-            GL.UseProgram(ShaderProgrammHandler);
             GL.BindVertexArray(VertexArrayHandler);
             GL.DrawElements(
                 PrimitiveType.Triangles,
@@ -52,19 +47,19 @@ namespace Console_Project
             );
         }
 
-        private void OnTransformStarted(object sender, EventArgs e)
+        public void Transform(Matrix4 transformMatrix)
         {
             Dispose();
-        }
-
-        private void OnTransformCompleted(object sender, EventArgs e)
-        {
+            Figure.Transform(transformMatrix);
             Init();
         }
 
-        public void Dispose(bool IsDisposeShader = false)
+        public void Dispose(bool IsFullDispoce = false)
         {
-            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+            if (IsFullDispoce)
+            {
+                GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+            }
             GL.DeleteBuffer(VertexBufferHandler);
             GL.DeleteBuffer(ElementBufferHandler);
             GL.DeleteVertexArray(VertexArrayHandler);

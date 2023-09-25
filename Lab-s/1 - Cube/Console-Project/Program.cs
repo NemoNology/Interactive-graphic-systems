@@ -1,4 +1,4 @@
 ﻿using Console_Project;
 
-var core = new Core("Cube");
+GameCore core = new("Cube", GameObjectsController.Triangle);
 core.Run();

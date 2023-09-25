@@ -31,16 +31,25 @@ namespace Console_Project
         /// Create Vertex Array Object
         /// </summary>
         /// <param name="vertexStride"> How many numbers one vertex have </param>
-        public static (int VertexBufferObject, int VertexArrayObject) CreateVBOandVAO(
-            float[] vertices,
+        public static (int, int, int) InitGameObjectByFigure(Figure figure, 
             BufferUsageHint bufferUsageHint = BufferUsageHint.StaticDraw,
-            int verticesTypeSize = sizeof(float),
-            // TODO: Why is there zero in index? And what is that zero-index means?
-            int vertexStride = 3
-        )
+            int vertexStride = 3)
         {
-            var vbo = CreateVBO(vertices, verticesTypeSize, bufferUsageHint); // vbo = Gen, Bind and Buffer
-            var vao = GL.GenVertexArray(); // VertexArrayHandler = GL.GenVertexArray();
+            var vertices = figure.Vertices;
+            var size = sizeof(float);
+
+            // Vertex Buffer Object
+            var vbo = GL.GenBuffer();
+            GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
+            GL.BufferData(
+                BufferTarget.ArrayBuffer,
+                vertices.Length * size,
+                vertices,
+                bufferUsageHint
+            ); 
+
+            // Vertex Array Object
+            var vao = GL.GenVertexArray();
             // TODO: [0] Why this zero? What's that means?
             var zero = 0;
             GL.BindVertexArray(vao);
@@ -49,30 +58,24 @@ namespace Console_Project
                 Ver3AttributeSize,
                 VertexAttribPointerType.Float,
                 false,
-                vertexStride * sizeof(float),
+                vertexStride * size,
                 0
             );
             // TODO: [0] ...
             GL.EnableVertexAttribArray(zero);
 
-            return (vbo, vao);
-        }
-
-        public static int CreateEBO(
-            uint[] indices,
-            BufferUsageHint bufferUsageHint = BufferUsageHint.StaticDraw,
-            int indicesTypeSize = sizeof(uint)
-        )
-        {
+            // Element Buffer Object
+            var indices = figure.Indices;
             var ebo = GL.GenBuffer();
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, ebo);
             GL.BufferData(
                 BufferTarget.ElementArrayBuffer,
-                indices.Length * indicesTypeSize,
+                indices.Length * sizeof(uint),
                 indices,
                 bufferUsageHint
             );
-            return ebo;
+
+            return (vbo, vao, ebo);
         }
     };
 }

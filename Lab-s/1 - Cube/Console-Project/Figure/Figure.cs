@@ -78,5 +78,7 @@ namespace Console_Project
 
         public static Figure TestSquare => Figure.CreateSquare(Vector3.Zero, 1f);
         public static Figure TestSquare2 => Figure.CreateSquare(new Vector3(0f, 0f, -1f), 1f);
+    
+        public static Figure Empty => new Figure(Array.Empty<Vector3>(), Array.Empty<uint>());
     }
 }

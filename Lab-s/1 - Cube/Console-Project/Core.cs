@@ -1,17 +1,16 @@
 using OpenTK.Graphics.OpenGL;
-using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 
 namespace Console_Project
 {
-    public class Core : GameWindow
+    public class GameCore : GameWindow
     {
-        GameObject gameObject;
-        Shader shader;
+        public GameObjectsController GameObjectsController {get; private set;}
 
-        public Core(
+        public GameCore(
             string title,
+            GameObjectsController gameObjectsController,
             int width = 800,
             int height = 640,
             VSyncMode vSyncMode = VSyncMode.On
@@ -25,14 +24,9 @@ namespace Console_Project
                     Vsync = vSyncMode,
                     Flags = ContextFlags.ForwardCompatible
                 }
-            )
+            )   
         {
-            shader = new(
-                Path.Combine(Shader.ShaderSourcesPath, "shader.vert"),
-                Path.Combine(Shader.ShaderSourcesPath, "shader.frag")
-            );
-            // TODO: Check OpenTK lessons solution in another folder about uniform and projection
-            gameObject = new GameObject(Figure.TestSquare2, shader.ShaderProgramHandler);
+            GameObjectsController = gameObjectsController;
             CenterWindow();
         }
 
@@ -40,7 +34,6 @@ namespace Console_Project
         {
             base.OnLoad();
             GL.ClearColor(.1f, .1f, .15f, 1f);
-            gameObject.Init();
         }
 
         protected override void OnUpdateFrame(FrameEventArgs args)
@@ -54,14 +47,13 @@ namespace Console_Project
             base.OnRenderFrame(args);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            gameObject.Draw();
+            GameObjectsController.Draw();
 
             SwapBuffers();
         }
 
         protected override void OnUnload()
         {
-            gameObject.Dispose();
             base.OnUnload();
         }
 
