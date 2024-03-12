@@ -41,7 +41,12 @@ func toogle():
 	is_card_up = !is_card_up
 	toogled.emit(id, is_card_up)
 	update_cart_texture()
-	
+
+func flip_to(to_card_up: bool):
+	is_card_up = to_card_up
+	toogled.emit(id, is_card_up)
+	update_cart_texture()
+
 func _pressed():
 	if not is_card_up:
 		toogle()
