@@ -1,7 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://btnuanbkkr2av"]
 
-[ext_resource type="Script" path="res://Scripts/game_rules.gd" id="1_5doje"]
-[ext_resource type="PackedScene" uid="uid://deqpkf0dhlqqk" path="res://Scenes/main_menu_background.tscn" id="2_n2qcx"]
+[ext_resource type="PackedScene" uid="uid://deqpkf0dhlqqk" path="res://Scenes/app_background.tscn" id="2_n2qcx"]
+
+[sub_resource type="GDScript" id="GDScript_1wfbf"]
+script/source = "extends Control
+
+func _on_back_pressed():
+	get_tree().change_scene_to_file(\"res://Scenes/main_menu.tscn\")
+"
 
 [node name="Game rules" type="Control"]
 layout_mode = 3
@@ -10,7 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_5doje")
+script = SubResource("GDScript_1wfbf")
 
 [node name="Background" parent="." instance=ExtResource("2_n2qcx")]
 layout_mode = 1
