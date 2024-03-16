@@ -192,40 +192,46 @@ grow_vertical = 2
 [node name="Background" parent="." instance=ExtResource("3_ls1sh")]
 layout_mode = 1
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -512.0
-offset_top = -256.0
-offset_bottom = 256.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="Main menu - UI" parent="HBoxContainer" instance=ExtResource("2_fiuoe")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/CenterContainer/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="HBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -0.5)
 fov = 55.0
 
-[node name="Sun" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+[node name="Sun" type="DirectionalLight3D" parent="HBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, -1)
 light_angular_distance = 60.0
 sky_mode = 1
 
-[node name="cubie" type="Node3D" parent="SubViewportContainer/SubViewport"]
+[node name="cubie" type="Node3D" parent="HBoxContainer/CenterContainer/SubViewportContainer/SubViewport"]
 transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
 
-[node name="Арматура" type="Node3D" parent="SubViewportContainer/SubViewport/cubie"]
+[node name="Арматура" type="Node3D" parent="HBoxContainer/CenterContainer/SubViewportContainer/SubViewport/cubie"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
-[node name="Skeleton3D" type="Skeleton3D" parent="SubViewportContainer/SubViewport/cubie/Арматура"]
+[node name="Skeleton3D" type="Skeleton3D" parent="HBoxContainer/CenterContainer/SubViewportContainer/SubViewport/cubie/Арматура"]
 bones/0/name = "Кость"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -388,16 +394,13 @@ bones/22/position = Vector3(0, 1, 0)
 bones/22/rotation = Quaternion(1.26551e-07, 5.24189e-08, -0.92388, 0.382683)
 bones/22/scale = Vector3(1, 1, 1)
 
-[node name="Cube" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/cubie/Арматура/Skeleton3D"]
+[node name="Cube" type="MeshInstance3D" parent="HBoxContainer/CenterContainer/SubViewportContainer/SubViewport/cubie/Арматура/Skeleton3D"]
 mesh = SubResource("ArrayMesh_h3h2a")
 skin = SubResource("Skin_ywj2y")
 surface_material_override/0 = SubResource("ShaderMaterial_alur1")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/cubie"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/CenterContainer/SubViewportContainer/SubViewport/cubie"]
 libraries = {
 "": SubResource("AnimationLibrary_6dh3f")
 }
 script = ExtResource("3_81ku6")
-
-[node name="Main menu - UI" parent="." instance=ExtResource("2_fiuoe")]
-layout_mode = 1
