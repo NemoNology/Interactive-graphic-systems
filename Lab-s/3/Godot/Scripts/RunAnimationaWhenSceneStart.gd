@@ -2,4 +2,5 @@ extends AnimationPlayer
 
 
 func _ready():
-	play(get_animation_list()[0])
+	for anim in get_animation_list():
+		play(anim)
