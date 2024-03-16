@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdg2iga20fysn"]
+[gd_scene load_steps=3 format=3 uid="uid://cdg2iga20fysn"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu_ui.gd" id="1_1odob"]
+[ext_resource type="Theme" uid="uid://gdkj8rebp5pw" path="res://Assets/Themes/Main.tres" id="1_l7vy2"]
 
 [node name="Main menu - UI" type="Control"]
 layout_mode = 3
@@ -11,6 +12,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_l7vy2")
 script = ExtResource("1_1odob")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -28,7 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_override_constants/separation = 10
+theme_override_constants/separation = 32
 
 [node name="Play" type="Button" parent="VBoxContainer"]
 layout_mode = 2
