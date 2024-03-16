@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/titles.gd" id="1_gayr4"]
 [ext_resource type="Theme" uid="uid://gdkj8rebp5pw" path="res://Assets/Themes/Main.tres" id="1_l1hor"]
 [ext_resource type="PackedScene" uid="uid://ngl3cw1ehyxu" path="res://Scenes/dropings.tscn" id="2_08a45"]
-[ext_resource type="PackedScene" uid="uid://deqpkf0dhlqqk" path="res://Scenes/main_menu_background.tscn" id="3_mimol"]
+[ext_resource type="PackedScene" uid="uid://deqpkf0dhlqqk" path="res://Scenes/app_background.tscn" id="3_mimol"]
 
 [node name="Titles" type="Control"]
 layout_mode = 3
