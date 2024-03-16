@@ -1,0 +1,48 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://gdkj8rebp5pw"]
+
+[ext_resource type="FontFile" uid="uid://bcpwristx1pt7" path="res://Assets/Fonts/Caros Soft.ttf" id="1_o24y6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vhkpc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bq31b"]
+bg_color = Color(0.141176, 0.32549, 0.333333, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 4.0
+expand_margin_top = 8.0
+expand_margin_right = 4.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_138pi"]
+bg_color = Color(0.121569, 0.266667, 0.282353, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 4.0
+expand_margin_top = 8.0
+expand_margin_right = 4.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8tvgr"]
+bg_color = Color(0.172549, 0.647059, 0.733333, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 4.0
+expand_margin_top = 8.0
+expand_margin_right = 4.0
+expand_margin_bottom = 8.0
+
+[resource]
+default_font = ExtResource("1_o24y6")
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/styles/focus = SubResource("StyleBoxEmpty_vhkpc")
+Button/styles/hover = SubResource("StyleBoxFlat_bq31b")
+Button/styles/normal = SubResource("StyleBoxFlat_138pi")
+Button/styles/pressed = SubResource("StyleBoxFlat_8tvgr")
