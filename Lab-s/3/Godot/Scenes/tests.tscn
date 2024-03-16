@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://2q3chmsvnrbv"]
 
-[ext_resource type="Script" path="res://Scripts/model.gd" id="1_8p5ls"]
+[ext_resource type="Script" path="res://Scripts/model3000.gd" id="1_8p5ls"]
 [ext_resource type="Script" path="res://Scripts/card.gd" id="2_q7eka"]
 [ext_resource type="Script" path="res://Scripts/card_field.gd" id="3_b3bey"]
 
