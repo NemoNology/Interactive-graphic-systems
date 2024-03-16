@@ -1,18 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6ds0421qxlq4"]
+[gd_scene load_steps=5 format=3 uid="uid://c6ds0421qxlq4"]
 
 [ext_resource type="Script" path="res://Scripts/titles.gd" id="1_gayr4"]
+[ext_resource type="Theme" uid="uid://gdkj8rebp5pw" path="res://Assets/Themes/Main.tres" id="1_l1hor"]
 [ext_resource type="PackedScene" uid="uid://ngl3cw1ehyxu" path="res://Scenes/dropings.tscn" id="2_08a45"]
+[ext_resource type="PackedScene" uid="uid://deqpkf0dhlqqk" path="res://Scenes/main_menu_background.tscn" id="3_mimol"]
 
-[sub_resource type="Curve3D" id="Curve3D_knre4"]
-
-[node name="ModelsDroping" type="Control"]
+[node name="Titles" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_l1hor")
 script = ExtResource("1_gayr4")
+
+[node name="BG" parent="." instance=ExtResource("3_mimol")]
+layout_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -30,24 +34,73 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Text and 3D scene" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/Text and 3D scene"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="MarginContainer/VBoxContainer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/VBoxContainer/Text and 3D scene/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1240, 633)
+size = Vector2i(1112, 572)
 render_target_update_mode = 4
 
-[node name="DroppingScene" parent="MarginContainer/VBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_08a45")]
+[node name="DroppingScene" parent="MarginContainer/VBoxContainer/Text and 3D scene/SubViewportContainer/SubViewport" instance=ExtResource("2_08a45")]
 
-[node name="SpawnPath" type="Path3D" parent="MarginContainer/VBoxContainer/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.38038, 0)
-curve = SubResource("Curve3D_knre4")
+[node name="Text" type="MarginContainer" parent="MarginContainer/VBoxContainer/Text and 3D scene"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
-[node name="SpawnLocation" type="PathFollow3D" parent="MarginContainer/VBoxContainer/SubViewportContainer/SubViewport/SpawnPath"]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/Text and 3D scene/Text"]
+layout_mode = 2
+color = Color(0.11, 0.263, 0.275, 0.75)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Text and 3D scene/Text"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/Text and 3D scene/Text/MarginContainer"]
+layout_mode = 2
+
+[node name="Authors" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Text and 3D scene/Text/MarginContainer/CenterContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][font_size=24]Игру создавали[/font_size]
+Банковский, Гурбатов, Номастыршин
+
+[font_size=20]Ведущий дизайнер[/font_size]
+Банковский
+[font_size=20]Ведущий гейм-дизайнер[/font_size]
+Банковский
+[font_size=20]Ведущий художник[/font_size]
+Банковский
+[font_size=20]Ведущий программист[/font_size]
+Банковский
+[font_size=20]3D-художники[/font_size]
+Банковский, Гурбатов
+[font_size=20]Программисты[/font_size]
+Банковский, Гурбатов, Номастыршин
+[font_size=20][/font_size]"
+fit_content = true
+autowrap_mode = 0
 
 [node name="Return" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
