@@ -13,7 +13,7 @@ grow_vertical = 2
 [node name="Control" parent="." instance=ExtResource("1_yo8da")]
 layout_mode = 1
 
-[node name="UI frame" type="MarginContainer" parent="Control"]
+[node name="UI frame" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,71 +25,71 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Elements vbox" type="VBoxContainer" parent="Control/UI frame"]
+[node name="Elements vbox" type="VBoxContainer" parent="UI frame"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="Control/UI frame/Elements vbox"]
+[node name="Title" type="Label" parent="UI frame/Elements vbox"]
 layout_mode = 2
 text = "Настройки"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/UI frame/Elements vbox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI frame/Elements vbox"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="Control/UI frame/Elements vbox/HBoxContainer"]
+[node name="Label" type="Label" parent="UI frame/Elements vbox/HBoxContainer"]
 layout_mode = 2
 text = "Количество жизней"
 
-[node name="CheckButton" type="SpinBox" parent="Control/UI frame/Elements vbox/HBoxContainer"]
+[node name="CheckButton" type="SpinBox" parent="UI frame/Elements vbox/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/UI frame/Elements vbox"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI frame/Elements vbox"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="Control/UI frame/Elements vbox/HBoxContainer2"]
+[node name="Label" type="Label" parent="UI frame/Elements vbox/HBoxContainer2"]
 layout_mode = 2
 text = "Количество пар карт"
 
-[node name="CheckButton2" type="SpinBox" parent="Control/UI frame/Elements vbox/HBoxContainer2"]
+[node name="CheckButton2" type="SpinBox" parent="UI frame/Elements vbox/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="CompleteBox" type="VBoxContainer" parent="Control/UI frame/Elements vbox"]
+[node name="CompleteBox" type="VBoxContainer" parent="UI frame/Elements vbox"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
 theme_override_constants/separation = 30
 
-[node name="ButtonBox" type="HBoxContainer" parent="Control/UI frame/Elements vbox/CompleteBox"]
+[node name="ButtonBox" type="HBoxContainer" parent="UI frame/Elements vbox/CompleteBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
 theme_override_constants/separation = 100
 
-[node name="Complete" type="Button" parent="Control/UI frame/Elements vbox/CompleteBox/ButtonBox"]
+[node name="Complete" type="Button" parent="UI frame/Elements vbox/CompleteBox/ButtonBox"]
 custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
 text = "Начать игру"
 
-[node name="Reset" type="Button" parent="Control/UI frame/Elements vbox/CompleteBox/ButtonBox"]
+[node name="Reset" type="Button" parent="UI frame/Elements vbox/CompleteBox/ButtonBox"]
 custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 text = "Настройки по умолчанию"
 
-[node name="Return" type="Button" parent="Control/UI frame/Elements vbox/CompleteBox/ButtonBox"]
+[node name="Return" type="Button" parent="UI frame/Elements vbox/CompleteBox/ButtonBox"]
 custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 text = "Вернуться"
