@@ -44,8 +44,8 @@ func cards_shufle_and_fill():
 	for c in children:
 		box.remove_child(c)
 		
-func flip_down_cards_by_id(id: int):
+func flip_cards_to(to_state: bool):
 	var cards_amount: int = box.get_child_count() - 1
 	for c: Card in box.get_children() as Array[Card]:
-		if c.id == id:
-			c.flip_to(false)
+		if c.is_card_up != to_state:
+			c.toogle()
