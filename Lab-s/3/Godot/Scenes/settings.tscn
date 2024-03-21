@@ -26,8 +26,6 @@ func _toogle_fullscreen(toggled_on: bool):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	var viewport = get_viewport()
-	viewport.content_scale_size = viewport.size
 	_update_values(toggled_on)
 "
 
