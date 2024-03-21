@@ -5,12 +5,12 @@ static var sprite_back: Texture2D = load("res://Assets/Images/card_back_texture.
 const DEFAULT_SIZE: Vector2 = Vector2(50, 75)
 static var hover_transform: Transform2D = Transform2D(0, Vector2(.9, .9), 0, Vector2(2, 4))
 
-@export var is_card_up:bool = false
-@export var id:int = -1
-var sprite:Sprite2D = Sprite2D.new()
-var label:Label = Label.new()
+@export var is_card_up: bool = true
+@export var id: int = -1
+var sprite: Sprite2D = Sprite2D.new()
+var label: Label = Label.new()
 
-signal toogled(id:int, is_card_up:bool)
+signal toogled(id: int, is_card_up: bool)
 
 func _init():
 	custom_minimum_size = DEFAULT_SIZE
@@ -39,11 +39,6 @@ func update_cart_texture():
 
 func toogle():
 	is_card_up = !is_card_up
-	toogled.emit(id, is_card_up)
-	update_cart_texture()
-
-func flip_to(to_card_up: bool):
-	is_card_up = to_card_up
 	toogled.emit(id, is_card_up)
 	update_cart_texture()
 
