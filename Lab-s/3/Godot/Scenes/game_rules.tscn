@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://btnuanbkkr2av"]
+[gd_scene load_steps=4 format=3 uid="uid://btnuanbkkr2av"]
 
+[ext_resource type="Theme" uid="uid://gdkj8rebp5pw" path="res://Assets/Themes/Main.tres" id="1_dl1b2"]
 [ext_resource type="PackedScene" uid="uid://deqpkf0dhlqqk" path="res://Scenes/app_background.tscn" id="2_n2qcx"]
 
 [sub_resource type="GDScript" id="GDScript_1wfbf"]
@@ -16,6 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_dl1b2")
 script = SubResource("GDScript_1wfbf")
 
 [node name="Background" parent="." instance=ExtResource("2_n2qcx")]
@@ -35,31 +37,14 @@ theme_override_constants/margin_bottom = 32
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_constants/separation = 40
 
-[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(1200, 580)
+[node name="Info" type="ColorRect" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.11, 0.263, 0.275, 0.75)
 
-[node name="Back" type="Control" parent="MarginContainer/VBoxContainer/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Border" type="ColorRect" parent="MarginContainer/VBoxContainer/Panel/Back"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.117647, 0.258824, 0.282353, 1)
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel/Back"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Info"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,26 +56,11 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="Inside color" type="ColorRect" parent="MarginContainer/VBoxContainer/Panel/Back/MarginContainer"]
+[node name="Text" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Info/MarginContainer"]
 layout_mode = 2
-color = Color(0.172549, 0.639216, 0.717647, 1)
-
-[node name="Text" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -565.0
-offset_top = -236.0
-offset_right = 565.0
-offset_bottom = 236.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_override_constants/separation = 32
 
-[node name="RulesTitle" type="Label" parent="MarginContainer/VBoxContainer/Panel/Text"]
+[node name="RulesTitle" type="Label" parent="MarginContainer/VBoxContainer/Info/MarginContainer/Text"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 56
@@ -98,20 +68,20 @@ text = "Правила"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="RulesText" type="Label" parent="MarginContainer/VBoxContainer/Panel/Text"]
+[node name="RulesText" type="Label" parent="MarginContainer/VBoxContainer/Info/MarginContainer/Text"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Игрок должен найти все пары до того, как кончится время или здоровье."
 autowrap_mode = 3
 
-[node name="ExtraInfoTitle" type="Label" parent="MarginContainer/VBoxContainer/Panel/Text"]
+[node name="ExtraInfoTitle" type="Label" parent="MarginContainer/VBoxContainer/Info/MarginContainer/Text"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Дополнительно"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="ExtraInfoText" type="Label" parent="MarginContainer/VBoxContainer/Panel/Text"]
+[node name="ExtraInfoText" type="Label" parent="MarginContainer/VBoxContainer/Info/MarginContainer/Text"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Игрок может изменять сложность игры посредством изменения количества пар, времени на партию и количество очков здоровья."
