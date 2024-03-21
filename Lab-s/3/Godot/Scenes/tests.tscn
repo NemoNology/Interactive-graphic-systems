@@ -29,17 +29,13 @@ sky_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 3, 0)
 input_ray_pickable = false
 script = ExtResource("1_8p5ls")
-model_path = "res://Assets/Models/card/card.glb"
 dispose_seconds = 2
-models_scale = Vector3(0.1, 0.1, 0.1)
 
 [node name="Model3001" type="RigidBody3D" parent="3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 3, 0)
 input_ray_pickable = false
 script = ExtResource("1_8p5ls")
-model_path = "res://Assets/Models/card/card.glb"
 dispose_seconds = 5
-models_scale = Vector3(0.1, 0.1, 0.1)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="3D"]
 transform = Transform3D(1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, 0, -0.119987, 0)
