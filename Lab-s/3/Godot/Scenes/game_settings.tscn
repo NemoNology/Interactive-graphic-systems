@@ -1,14 +1,64 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgepd0rf3ha65"]
+[gd_scene load_steps=7 format=3 uid="uid://cgepd0rf3ha65"]
 
+[ext_resource type="Theme" uid="uid://gdkj8rebp5pw" path="res://Assets/Themes/Main.tres" id="1_f11hp"]
 [ext_resource type="PackedScene" uid="uid://deqpkf0dhlqqk" path="res://Scenes/app_background.tscn" id="1_yo8da"]
 
-[node name="Control" type="Control"]
+[sub_resource type="GDScript" id="GDScript_3xl7b"]
+script/source = "extends Control
+
+@export var timer_checkbox: CheckBox
+@export var timer_spinbox: SpinBox
+
+@export var life_checkbox: CheckBox
+@export var life_spinbox: SpinBox
+
+func _ready():
+	timer_checkbox.toggled.connect(_on_timer_checkbox_toggled)
+	life_checkbox.toggled.connect(_on_life_checkbox_toggled)
+
+func _on_timer_checkbox_toggled(is_toggled: bool):
+	timer_spinbox.editable = is_toggled
+func _on_life_checkbox_toggled(is_toggled: bool):
+	life_spinbox.editable = is_toggled
+"
+
+[sub_resource type="GDScript" id="GDScript_x7rvj"]
+script/source = "extends Button
+
+func _pressed():
+	get_tree().change_scene_to_file(\"res://Scenes/game_scene.tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_ao77w"]
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _pressed():
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_sek5s"]
+script/source = "extends Button
+
+
+func _pressed():
+	get_tree().change_scene_to_file(\"res://Scenes/main_menu.tscn\")
+"
+
+[node name="Control" type="Control" node_paths=PackedStringArray("timer_checkbox", "timer_spinbox", "life_checkbox", "life_spinbox")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_f11hp")
+script = SubResource("GDScript_3xl7b")
+timer_checkbox = NodePath("UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/CheckBox")
+timer_spinbox = NodePath("UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/Таймер/SpinBox")
+life_checkbox = NodePath("UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/CheckBoxLifes")
+life_spinbox = NodePath("UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/SpinBoxLifes")
 
 [node name="Control" parent="." instance=ExtResource("1_yo8da")]
 layout_mode = 1
@@ -30,66 +80,92 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="UI frame/Elements vbox"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Настройки"
 horizontal_alignment = 1
+uppercase = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI frame/Elements vbox"]
-custom_minimum_size = Vector2(0, 50)
+[node name="MarginContainer" type="MarginContainer" parent="UI frame/Elements vbox"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 0
+size_flags_vertical = 6
+
+[node name="ColorRect" type="ColorRect" parent="UI frame/Elements vbox/MarginContainer"]
+layout_mode = 2
+color = Color(0.109804, 0.262745, 0.27451, 0.74902)
+
+[node name="MarginContainer" type="MarginContainer" parent="UI frame/Elements vbox/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Settings" type="GridContainer" parent="UI frame/Elements vbox/MarginContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+columns = 2
+
+[node name="CheckBoxLifes" type="CheckBox" parent="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Кол-во жизней"
+
+[node name="SpinBoxLifes" type="SpinBox" parent="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings"]
+layout_mode = 2
+size_flags_horizontal = 0
+editable = false
+
+[node name="CheckBox" type="CheckBox" parent="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Таймер"
+
+[node name="Таймер" type="HBoxContainer" parent="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="UI frame/Elements vbox/HBoxContainer"]
-layout_mode = 2
-text = "Количество жизней"
-
-[node name="CheckButton" type="SpinBox" parent="UI frame/Elements vbox/HBoxContainer"]
+[node name="SpinBox" type="SpinBox" parent="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/Таймер"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+max_value = 300.0
+editable = false
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI frame/Elements vbox"]
-custom_minimum_size = Vector2(0, 50)
+[node name="Label2" type="Label" parent="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/Таймер"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_constants/separation = 20
+text = "секунд"
 
-[node name="Label" type="Label" parent="UI frame/Elements vbox/HBoxContainer2"]
+[node name="Label" type="Label" parent="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings"]
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
 text = "Количество пар карт"
 
-[node name="CheckButton2" type="SpinBox" parent="UI frame/Elements vbox/HBoxContainer2"]
+[node name="SpinBox" type="SpinBox" parent="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_horizontal = 0
 
-[node name="CompleteBox" type="VBoxContainer" parent="UI frame/Elements vbox"]
+[node name="ButtonBox" type="HBoxContainer" parent="UI frame/Elements vbox"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 10
-theme_override_constants/separation = 30
-
-[node name="ButtonBox" type="HBoxContainer" parent="UI frame/Elements vbox/CompleteBox"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 10
+size_flags_vertical = 8
 theme_override_constants/separation = 100
 
-[node name="Complete" type="Button" parent="UI frame/Elements vbox/CompleteBox/ButtonBox"]
-custom_minimum_size = Vector2(250, 50)
+[node name="Complete" type="Button" parent="UI frame/Elements vbox/ButtonBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
 text = "Начать игру"
+script = SubResource("GDScript_x7rvj")
 
-[node name="Reset" type="Button" parent="UI frame/Elements vbox/CompleteBox/ButtonBox"]
-custom_minimum_size = Vector2(250, 50)
+[node name="Reset" type="Button" parent="UI frame/Elements vbox/ButtonBox"]
 layout_mode = 2
 text = "Настройки по умолчанию"
+script = SubResource("GDScript_ao77w")
 
-[node name="Return" type="Button" parent="UI frame/Elements vbox/CompleteBox/ButtonBox"]
-custom_minimum_size = Vector2(250, 50)
+[node name="Return" type="Button" parent="UI frame/Elements vbox/ButtonBox"]
 layout_mode = 2
 text = "Вернуться"
+script = SubResource("GDScript_sek5s")
