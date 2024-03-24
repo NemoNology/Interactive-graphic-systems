@@ -1,25 +1,77 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgepd0rf3ha65"]
+[gd_scene load_steps=10 format=3 uid="uid://cgepd0rf3ha65"]
 
 [ext_resource type="Theme" uid="uid://gdkj8rebp5pw" path="res://Assets/Themes/Main.tres" id="1_f11hp"]
 [ext_resource type="PackedScene" uid="uid://deqpkf0dhlqqk" path="res://Scenes/app_background.tscn" id="1_yo8da"]
 
-[sub_resource type="GDScript" id="GDScript_3xl7b"]
-script/source = "extends Control
-
-@export var timer_checkbox: CheckBox
-@export var timer_spinbox: SpinBox
-
-@export var life_checkbox: CheckBox
-@export var life_spinbox: SpinBox
+[sub_resource type="GDScript" id="GDScript_ucmaa"]
+script/source = "extends CheckBox
 
 func _ready():
-	timer_checkbox.toggled.connect(_on_timer_checkbox_toggled)
-	life_checkbox.toggled.connect(_on_life_checkbox_toggled)
+	button_pressed = GameController.is_health_on
 
-func _on_timer_checkbox_toggled(is_toggled: bool):
-	timer_spinbox.editable = is_toggled
-func _on_life_checkbox_toggled(is_toggled: bool):
-	life_spinbox.editable = is_toggled
+func _toggled(toggled_on):
+	GameController.is_health_on = toggled_on
+
+func _on_reset_button_pressed():
+	button_pressed = GameController.DEFAULT_IS_HEALTH_ON
+"
+
+[sub_resource type="GDScript" id="GDScript_xxwea"]
+script/source = "extends SpinBox
+
+func _ready():
+	value = GameController.health_points
+	
+func _value_changed(new_value: float):
+	GameController.health_points = new_value
+
+func _on_check_box_lives_toggled(toggled_on):
+	editable = toggled_on
+
+func _on_reset_button_pressed():
+	value = GameController.DEFAULT_HEALTH_POINTS
+"
+
+[sub_resource type="GDScript" id="GDScript_c1f1g"]
+script/source = "extends CheckBox
+
+func _ready():
+	button_pressed = GameController.is_timer_on
+
+func _toggled(toggled_on):
+	GameController.is_timer_on = toggled_on
+
+func _on_reset_button_pressed():
+	button_pressed = GameController.DEFAULT_IS_TIMER_ON
+"
+
+[sub_resource type="GDScript" id="GDScript_qlal7"]
+script/source = "extends SpinBox
+
+func _ready():
+	value = GameController.game_time
+
+func _value_changed(new_value):
+	GameController.game_time = new_value
+
+func _on_reset_button_pressed():
+	value = GameController.DEFAULT_GAME_TIME
+
+func _on_check_box_timer_toggled(toggled_on):
+	editable = toggled_on
+"
+
+[sub_resource type="GDScript" id="GDScript_5uf0o"]
+script/source = "extends SpinBox
+
+func _ready():
+	value = GameController.pairs_count
+
+func _value_changed(new_value):
+	GameController.pairs_count = new_value
+
+func _on_reset_button_pressed():
+	value = GameController.DEFAULT_PAIRS_COUNT
 "
 
 [sub_resource type="GDScript" id="GDScript_x7rvj"]
@@ -29,24 +81,14 @@ func _pressed():
 	get_tree().change_scene_to_file(\"res://Scenes/game_scene.tscn\")
 "
 
-[sub_resource type="GDScript" id="GDScript_ao77w"]
-script/source = "extends Button
-
-
-# Called when the node enters the scene tree for the first time.
-func _pressed():
-	pass
-"
-
 [sub_resource type="GDScript" id="GDScript_sek5s"]
 script/source = "extends Button
-
 
 func _pressed():
 	get_tree().change_scene_to_file(\"res://Scenes/main_menu.tscn\")
 "
 
-[node name="Control" type="Control" node_paths=PackedStringArray("timer_checkbox", "timer_spinbox", "life_checkbox", "life_spinbox")]
+[node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,11 +96,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_f11hp")
-script = SubResource("GDScript_3xl7b")
-timer_checkbox = NodePath("UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/CheckBox")
-timer_spinbox = NodePath("UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/Таймер/SpinBox")
-life_checkbox = NodePath("UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/CheckBoxLifes")
-life_spinbox = NodePath("UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/SpinBoxLifes")
 
 [node name="Control" parent="." instance=ExtResource("1_yo8da")]
 layout_mode = 1
@@ -110,28 +147,36 @@ columns = 2
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Кол-во жизней"
+script = SubResource("GDScript_ucmaa")
 
 [node name="SpinBoxLifes" type="SpinBox" parent="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings"]
 layout_mode = 2
 size_flags_horizontal = 0
-editable = false
+max_value = 5.0
+rounded = true
+script = SubResource("GDScript_xxwea")
 
 [node name="CheckBox" type="CheckBox" parent="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Таймер"
+script = SubResource("GDScript_c1f1g")
 
 [node name="Таймер" type="HBoxContainer" parent="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 8
 
 [node name="SpinBox" type="SpinBox" parent="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/Таймер"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+min_value = 1.0
 max_value = 300.0
+value = 1.0
+rounded = true
 editable = false
+script = SubResource("GDScript_qlal7")
 
 [node name="Label2" type="Label" parent="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/Таймер"]
 layout_mode = 2
@@ -146,6 +191,8 @@ text = "Количество пар карт"
 [node name="SpinBox" type="SpinBox" parent="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings"]
 layout_mode = 2
 size_flags_horizontal = 0
+rounded = true
+script = SubResource("GDScript_5uf0o")
 
 [node name="ButtonBox" type="HBoxContainer" parent="UI frame/Elements vbox"]
 layout_mode = 2
@@ -153,7 +200,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_constants/separation = 100
 
-[node name="Complete" type="Button" parent="UI frame/Elements vbox/ButtonBox"]
+[node name="Start" type="Button" parent="UI frame/Elements vbox/ButtonBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
@@ -163,9 +210,16 @@ script = SubResource("GDScript_x7rvj")
 [node name="Reset" type="Button" parent="UI frame/Elements vbox/ButtonBox"]
 layout_mode = 2
 text = "Настройки по умолчанию"
-script = SubResource("GDScript_ao77w")
 
 [node name="Return" type="Button" parent="UI frame/Elements vbox/ButtonBox"]
 layout_mode = 2
 text = "Вернуться"
 script = SubResource("GDScript_sek5s")
+
+[connection signal="toggled" from="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/CheckBoxLifes" to="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/SpinBoxLifes" method="_on_check_box_lives_toggled"]
+[connection signal="toggled" from="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/CheckBox" to="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/Таймер/SpinBox" method="_on_check_box_timer_toggled"]
+[connection signal="pressed" from="UI frame/Elements vbox/ButtonBox/Reset" to="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/CheckBoxLifes" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="UI frame/Elements vbox/ButtonBox/Reset" to="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/SpinBoxLifes" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="UI frame/Elements vbox/ButtonBox/Reset" to="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/CheckBox" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="UI frame/Elements vbox/ButtonBox/Reset" to="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/Таймер/SpinBox" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="UI frame/Elements vbox/ButtonBox/Reset" to="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/SpinBox" method="_on_reset_button_pressed"]
