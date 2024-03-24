@@ -1,6 +1,6 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://gdkj8rebp5pw"]
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://gdkj8rebp5pw"]
 
-[ext_resource type="FontFile" uid="uid://bcpwristx1pt7" path="res://Assets/Fonts/Caros Soft.ttf" id="1_o24y6"]
+[ext_resource type="FontFile" uid="uid://mgd4dbq72jjd" path="res://Assets/Fonts/Caros Soft.ttf" id="1_o24y6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vhkpc"]
 
@@ -38,6 +38,16 @@ expand_margin_top = 8.0
 expand_margin_right = 4.0
 expand_margin_bottom = 8.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mgii1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_om8ne"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0vivv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jju87"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wvhbw"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ob67t"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r6fgg"]
@@ -52,6 +62,14 @@ Button/styles/focus = SubResource("StyleBoxEmpty_vhkpc")
 Button/styles/hover = SubResource("StyleBoxFlat_bq31b")
 Button/styles/normal = SubResource("StyleBoxFlat_138pi")
 Button/styles/pressed = SubResource("StyleBoxFlat_8tvgr")
+CheckBox/colors/font_hover_color = Color(0.180392, 0.647059, 0.733333, 1)
+CheckBox/colors/font_hover_pressed_color = Color(0.156863, 0.643137, 0.721569, 1)
+CheckBox/colors/font_pressed_color = Color(1, 1, 1, 1)
+CheckBox/styles/focus = SubResource("StyleBoxEmpty_mgii1")
+CheckBox/styles/hover = SubResource("StyleBoxEmpty_om8ne")
+CheckBox/styles/hover_pressed = SubResource("StyleBoxEmpty_0vivv")
+CheckBox/styles/normal = SubResource("StyleBoxEmpty_jju87")
+CheckBox/styles/pressed = SubResource("StyleBoxEmpty_wvhbw")
 CheckButton/styles/hover = SubResource("StyleBoxEmpty_ob67t")
 CheckButton/styles/normal = SubResource("StyleBoxEmpty_r6fgg")
 CheckButton/styles/pressed = SubResource("StyleBoxEmpty_pu3ef")
