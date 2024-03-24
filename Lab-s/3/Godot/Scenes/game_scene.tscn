@@ -7,29 +7,70 @@
 [sub_resource type="GDScript" id="GDScript_1m53h"]
 script/source = "extends Control
 
-@export_category(\"Game controller\")
-var health_points: int = 3
+@export_category(\"Game scene controller\")
+var health_points: int = GameController.health_points
 @export var card_field: CardField
+@export var lives_output: Label
+@export var game_time_output: Label
+@export var start_time_output: Label
+@export var start_time_control: Control
+@export var lives_control: Control
+@export var game_time_control: Control
+var start_timer: Timer = Timer.new()
+var game_timer: Timer
 var card_buffer: int = -1
 
 func _ready():
-	card_field.card_toogled.connect(on_card_selected)
+	GameController.is_win = false
+	card_field.card_pairs_amount = GameController.pairs_count
+	card_field.cards_shufle_and_fill()
+	card_field.card_toogled.connect(_on_card_selected)
+	start_timer.wait_time = 4
+	start_timer.autostart = true
+	start_timer.timeout.connect(_start)
+	add_child(start_timer)
 
-func on_card_selected(id: int, is_card_front: bool):
+func _process(delta):
+	if start_timer != null:
+		start_time_output.text = str(roundi(start_timer.time_left))
+	if GameController.is_timer_on and game_timer != null:
+		game_time_output.text = str(roundi(game_timer.time_left))
+
+func _on_card_selected(id: int, _is_card_front: bool):
 	if card_buffer < 0:
 		card_buffer = id
 		return
 	elif card_buffer == id:
 		card_field.remove_cards_by_id(id)
+		if card_field.box.get_child_count() == 0:
+			GameController.is_win = true
+			_game_over()
 	else:
-		health_points -= 1
-		card_field.flip_down_cards_by_id(id)
-		if health_points < 1:
-			game_over()
+		card_field.flip_cards_to(false)
+		if GameController.is_health_on:
+			health_points -= 1
+			lives_output.text = str(health_points)
+			if health_points < 1:
+				_game_over()
 	card_buffer = -1
-			
-func game_over():
-	pass
+
+func _start():
+	start_timer.queue_free()
+	start_time_control.visible = false
+	card_field.flip_cards_to(false)
+	if GameController.is_health_on:
+		lives_output.text = str(GameController.health_points)
+		lives_control.visible = true
+	if GameController.is_timer_on:
+		game_time_control.visible = true
+		game_timer = Timer.new()
+		game_timer.autostart = true
+		game_timer.wait_time = GameController.game_time
+		game_timer.timeout.connect(_game_over)
+		add_child(game_timer)
+
+func _game_over():
+	get_tree().change_scene_to_file(\"res://Scenes/game_end.tscn\")
 "
 
 [sub_resource type="GDScript" id="GDScript_tm4c6"]
@@ -39,7 +80,7 @@ func _pressed():
 	get_tree().change_scene_to_file(\"res://Scenes/game_settings.tscn\")
 "
 
-[node name="GameScene" type="Control" node_paths=PackedStringArray("card_field")]
+[node name="GameScene" type="Control" node_paths=PackedStringArray("card_field", "lives_output", "game_time_output", "start_time_output", "start_time_control", "lives_control", "game_time_control")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,6 +90,12 @@ grow_vertical = 2
 theme = ExtResource("1_k83q5")
 script = SubResource("GDScript_1m53h")
 card_field = NodePath("MarginContainer/VBoxContainer/CardField")
+lives_output = NodePath("MarginContainer/VBoxContainer/Status bar/Health/Value")
+game_time_output = NodePath("MarginContainer/VBoxContainer/Status bar/Timer/Value")
+start_time_output = NodePath("MarginContainer/VBoxContainer/Status bar/Start time/Value")
+start_time_control = NodePath("MarginContainer/VBoxContainer/Status bar/Start time")
+lives_control = NodePath("MarginContainer/VBoxContainer/Status bar/Health")
+game_time_control = NodePath("MarginContainer/VBoxContainer/Status bar/Timer")
 
 [node name="Control" parent="." instance=ExtResource("1_7exoi")]
 layout_mode = 1
@@ -68,30 +115,54 @@ theme_override_constants/margin_bottom = 16
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Status bar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="Health" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Health" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Status bar"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Health"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/Status bar/Health"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Здоровье:"
 
-[node name="Timer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/Status bar/Health"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+
+[node name="Start time" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Status bar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/Status bar/Start time"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Начало через:"
+
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/Status bar/Start time"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+
+[node name="Timer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Status bar"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Timer"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/Status bar/Timer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Время:"
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/Status bar/Timer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/Status bar"]
+layout_mode = 2
+size_flags_horizontal = 10
 text = "Вернуться назад"
 script = SubResource("GDScript_tm4c6")
 
