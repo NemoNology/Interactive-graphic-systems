@@ -19,6 +19,7 @@ config/icon="res://Assets/Images/icon.svg"
 [autoload]
 
 AppController="*res://Scripts/Singletons/app_controller.gd"
+GameController="*res://Scripts/Singletons/game_controller.gd"
 
 [display]
 
