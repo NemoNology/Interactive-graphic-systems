@@ -84,7 +84,7 @@ layout_mode = 2
 layout_mode = 2
 bbcode_enabled = true
 text = "[center][font_size=24]Игру создавали[/font_size]
-Банковский, Гурбатов, Номастыршин
+Банковский, Гурбатов, Монастыршин
 
 [font_size=20]Ведущий дизайнер[/font_size]
 Банковский
@@ -97,7 +97,7 @@ text = "[center][font_size=24]Игру создавали[/font_size]
 [font_size=20]3D-художники[/font_size]
 Банковский, Гурбатов
 [font_size=20]Программисты[/font_size]
-Банковский, Гурбатов, Номастыршин
+Банковский, Гурбатов, Монастыршин
 [font_size=20][/font_size]"
 fit_content = true
 autowrap_mode = 0
