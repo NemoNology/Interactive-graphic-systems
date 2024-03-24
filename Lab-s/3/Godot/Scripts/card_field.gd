@@ -31,13 +31,9 @@ func some_card_toogled(id: int, is_face_up: bool):
 	card_toogled.emit(id, is_face_up)
 
 func remove_cards_by_id(id: int):
-	var cards_amount: int = box.get_child_count() - 1
-	while cards_amount > 0:
-		var child: Card = box.get_child(cards_amount)
-		if child.id == id:
-			box.remove_child(child)
-		else:
-			cards_amount -= 1
+	for c in box.get_children():
+		if c is Card and c.id == id:
+			box.remove_child(c)
 
 func cards_shufle_and_fill():
 	var children: Array[Node] = box.get_children()
@@ -48,4 +44,4 @@ func flip_cards_to(to_state: bool):
 	var cards_amount: int = box.get_child_count() - 1
 	for c: Card in box.get_children() as Array[Card]:
 		if c.is_card_up != to_state:
-			c.toogle()
+			c.toogle(false)
