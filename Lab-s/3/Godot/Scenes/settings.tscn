@@ -63,6 +63,7 @@ theme_override_constants/separation = 20
 [node name="Title" type="Label" parent="UI frame/Elements vbox"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
 text = "Настройки"
 uppercase = true
 
