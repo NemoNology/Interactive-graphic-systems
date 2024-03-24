@@ -71,7 +71,7 @@ uppercase = true
 [node name="RulesText" type="Label" parent="MarginContainer/VBoxContainer/Info/MarginContainer/Text"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "Игрок должен найти все пары до того, как кончится время или здоровье."
+text = "Игрок должен найти все пары карт. Пара карт имеет одинаковый идентификатор, который изображён на лицевой части карты."
 autowrap_mode = 3
 
 [node name="ExtraInfoTitle" type="Label" parent="MarginContainer/VBoxContainer/Info/MarginContainer/Text"]
@@ -84,7 +84,7 @@ uppercase = true
 [node name="ExtraInfoText" type="Label" parent="MarginContainer/VBoxContainer/Info/MarginContainer/Text"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "Игрок может изменять сложность игры посредством изменения количества пар, времени на партию и количество очков здоровья."
+text = "Игрок может изменять сложность игры посредством изменения количества пар, времени на партию и количества очков здоровья."
 autowrap_mode = 3
 
 [node name="Back" type="Button" parent="MarginContainer/VBoxContainer"]
