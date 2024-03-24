@@ -1,21 +1,40 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdg2iga20fysn"]
+[gd_scene load_steps=7 format=3 uid="uid://cdg2iga20fysn"]
 
 [ext_resource type="Theme" uid="uid://gdkj8rebp5pw" path="res://Assets/Themes/Main.tres" id="1_l7vy2"]
 
-[sub_resource type="GDScript" id="GDScript_3lv2i"]
-script/source = "extends Control
+[sub_resource type="GDScript" id="GDScript_aakff"]
+script/source = "extends Button
 
-func _on_exit_pressed():
-	get_tree().quit()
+func _pressed():
+	get_tree().change_scene_to_file(\"res://Scenes/game_settings.tscn\")
+"
 
-func _on_game_rules_pressed():
+[sub_resource type="GDScript" id="GDScript_wcrnu"]
+script/source = "extends Button
+
+func _pressed():
 	get_tree().change_scene_to_file(\"res://Scenes/game_rules.tscn\")
+"
 
-func _on_titles_pressed():
-	get_tree().change_scene_to_file(\"res://Scenes/titles.tscn\")
+[sub_resource type="GDScript" id="GDScript_wh4ve"]
+script/source = "extends Button
 
-func _on_settings_pressed():
+func _pressed():
 	get_tree().change_scene_to_file(\"res://Scenes/settings.tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_5diue"]
+script/source = "extends Button
+
+func _pressed():
+	get_tree().change_scene_to_file(\"res://Scenes/titles.tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_pw2a3"]
+script/source = "extends Button
+
+func _pressed():
+	get_tree().quit()
 "
 
 [node name="Main menu - UI" type="Control"]
@@ -28,7 +47,6 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_l7vy2")
-script = SubResource("GDScript_3lv2i")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -50,24 +68,24 @@ theme_override_constants/separation = 32
 [node name="Play" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Начать игру"
+script = SubResource("GDScript_aakff")
 
 [node name="Game rules" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Правила игры"
+script = SubResource("GDScript_wcrnu")
 
 [node name="Settings" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Настройки"
+script = SubResource("GDScript_wh4ve")
 
 [node name="Autors" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Титры"
+script = SubResource("GDScript_5diue")
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Выйти из игры"
-
-[connection signal="pressed" from="VBoxContainer/Game rules" to="." method="_on_game_rules_pressed"]
-[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="VBoxContainer/Autors" to="." method="_on_titles_pressed"]
-[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+script = SubResource("GDScript_pw2a3")
