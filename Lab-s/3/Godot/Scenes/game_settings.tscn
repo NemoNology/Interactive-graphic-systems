@@ -152,7 +152,9 @@ script = SubResource("GDScript_ucmaa")
 [node name="SpinBoxLifes" type="SpinBox" parent="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings"]
 layout_mode = 2
 size_flags_horizontal = 0
+min_value = 1.0
 max_value = 5.0
+value = 1.0
 rounded = true
 script = SubResource("GDScript_xxwea")
 
@@ -191,6 +193,9 @@ text = "Количество пар карт"
 [node name="SpinBox" type="SpinBox" parent="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings"]
 layout_mode = 2
 size_flags_horizontal = 0
+min_value = 2.0
+max_value = 32.0
+value = 2.0
 rounded = true
 script = SubResource("GDScript_5uf0o")
 
