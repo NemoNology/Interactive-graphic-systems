@@ -1,27 +1,34 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfq35xv45uvfr"]
+[gd_scene load_steps=7 format=3 uid="uid://drmokud50vwxv"]
 
 [ext_resource type="PackedScene" uid="uid://deqpkf0dhlqqk" path="res://Scenes/app_background.tscn" id="1_815ad"]
 [ext_resource type="Theme" uid="uid://gdkj8rebp5pw" path="res://Assets/Themes/Main.tres" id="1_s3cx7"]
+
+[sub_resource type="GDScript" id="GDScript_5nml6"]
+script/source = "extends Label
+
+func _ready():
+	text = \"Вы победили\" if GameController.is_win else \"Вы проиграли\"
+"
 
 [sub_resource type="GDScript" id="GDScript_dld7a"]
 script/source = "extends Button
 
 func _pressed():
-	get_tree().change_scene_to_file(\"res://Scenes/game_settings.tscn\")
+	get_tree().change_scene_to_file(\"res://Scenes/main_menu.tscn\")
 "
 
 [sub_resource type="GDScript" id="GDScript_s85yr"]
 script/source = "extends Button
 
 func _pressed():
-	#get_tree().change_scene_to_file()
+	get_tree().change_scene_to_file(\"res://Scenes/game_scene.tscn\")
 "
 
 [sub_resource type="GDScript" id="GDScript_7hkc5"]
 script/source = "extends Button
 
 func _pressed():
-	get_tree().change_scene_to_file(\"res://Scenes/main_menu.tscn\")
+	get_tree().change_scene_to_file(\"res://Scenes/game_settings.tscn\")
 "
 
 [node name="GameEnd" type="Control"]
@@ -88,6 +95,7 @@ theme_override_font_sizes/font_size = 40
 text = "вы проиграли"
 horizontal_alignment = 1
 uppercase = true
+script = SubResource("GDScript_5nml6")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
