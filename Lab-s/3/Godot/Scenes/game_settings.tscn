@@ -21,6 +21,7 @@ script/source = "extends SpinBox
 
 func _ready():
 	value = GameController.health_points
+	editable = GameController.is_health_on
 	
 func _value_changed(new_value: float):
 	GameController.health_points = new_value
@@ -30,6 +31,7 @@ func _on_check_box_lives_toggled(toggled_on):
 
 func _on_reset_button_pressed():
 	value = GameController.DEFAULT_HEALTH_POINTS
+	editable = GameController.DEFAULT_IS_HEALTH_ON
 "
 
 [sub_resource type="GDScript" id="GDScript_c1f1g"]
@@ -50,12 +52,14 @@ script/source = "extends SpinBox
 
 func _ready():
 	value = GameController.game_time
+	editable = GameController.is_timer_on
 
 func _value_changed(new_value):
 	GameController.game_time = new_value
 
 func _on_reset_button_pressed():
 	value = GameController.DEFAULT_GAME_TIME
+	editable = GameController.DEFAULT_IS_TIMER_ON
 
 func _on_check_box_timer_toggled(toggled_on):
 	editable = toggled_on
@@ -194,7 +198,7 @@ text = "Количество пар карт"
 layout_mode = 2
 size_flags_horizontal = 0
 min_value = 2.0
-max_value = 32.0
+max_value = 64.0
 value = 2.0
 rounded = true
 script = SubResource("GDScript_5uf0o")
