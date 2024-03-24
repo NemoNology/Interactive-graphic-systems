@@ -1,0 +1,112 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfq35xv45uvfr"]
+
+[ext_resource type="PackedScene" uid="uid://deqpkf0dhlqqk" path="res://Scenes/app_background.tscn" id="1_815ad"]
+[ext_resource type="Theme" uid="uid://gdkj8rebp5pw" path="res://Assets/Themes/Main.tres" id="1_s3cx7"]
+
+[sub_resource type="GDScript" id="GDScript_dld7a"]
+script/source = "extends Button
+
+func _pressed():
+	get_tree().change_scene_to_file(\"res://Scenes/game_settings.tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_s85yr"]
+script/source = "extends Button
+
+func _pressed():
+	#get_tree().change_scene_to_file()
+"
+
+[sub_resource type="GDScript" id="GDScript_7hkc5"]
+script/source = "extends Button
+
+func _pressed():
+	get_tree().change_scene_to_file(\"res://Scenes/main_menu.tscn\")
+"
+
+[node name="GameEnd" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_s3cx7")
+
+[node name="Background" parent="." instance=ExtResource("1_815ad")]
+layout_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Info" type="ColorRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.11, 0.263, 0.275, 0.75)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Info"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Text" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Info/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 32
+
+[node name="GameEnd" type="Label" parent="MarginContainer/VBoxContainer/Info/MarginContainer/Text"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 56
+text = "ИГРА ОКОНЧЕНА"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="ResultGame" type="Label" parent="MarginContainer/VBoxContainer/Info/MarginContainer/Text"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "вы проиграли"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 64
+
+[node name="Back" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Вернуться в меню"
+script = SubResource("GDScript_dld7a")
+
+[node name="Repeat" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Повторить"
+script = SubResource("GDScript_s85yr")
+
+[node name="NewGame" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Начать новую игру"
+script = SubResource("GDScript_7hkc5")
