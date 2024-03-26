@@ -55,12 +55,11 @@ func _on_card_selected(id: int, _is_card_front: bool):
 	card_buffer = -1
 
 func _start():
-	start_timer.queue_free()
-	start_time_control.visible = false
 	card_field.flip_cards_to(false)
+	start_time_control.visible = false
 	if GameController.is_health_on:
-		lives_output.text = str(GameController.health_points)
 		lives_control.visible = true
+		lives_output.text = str(GameController.health_points)
 	if GameController.is_timer_on:
 		game_time_control.visible = true
 		game_timer = Timer.new()
@@ -74,6 +73,8 @@ func _game_over():
 
 func _on_card_field_size_changed():
 	card_field.reset_cards()
+	if not start_time_control.visible:
+		card_field.flip_cards_to(false)
 "
 
 [sub_resource type="GDScript" id="GDScript_tm4c6"]
