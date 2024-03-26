@@ -37,9 +37,9 @@ func update_cart_texture():
 	label.set_visible(is_card_up)
 	size = custom_minimum_size
 
-func toogle(signal_emit: bool = true):
+func toogle(is_signal_emit: bool = true):
 	is_card_up = !is_card_up
-	if signal_emit:
+	if is_signal_emit:
 		toogled.emit(id, is_card_up)
 	update_cart_texture()
 
