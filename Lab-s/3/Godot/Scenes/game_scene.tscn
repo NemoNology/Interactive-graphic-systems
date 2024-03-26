@@ -23,8 +23,8 @@ var card_buffer: int = -1
 func _ready():
 	GameController.is_win = false
 	card_field.card_pairs_amount = GameController.pairs_count
-	card_field.cards_shufle_and_fill()
 	card_field.card_toogled.connect(_on_card_selected)
+	card_field.item_rect_changed.connect(_on_card_field_size_changed)
 	start_timer.wait_time = 4
 	start_timer.autostart = true
 	start_timer.timeout.connect(_start)
@@ -42,11 +42,11 @@ func _on_card_selected(id: int, _is_card_front: bool):
 		return
 	elif card_buffer == id:
 		card_field.remove_cards_by_id(id)
-		if card_field.box.get_child_count() == 0:
+		if card_field.get_child_count() == 0:
 			GameController.is_win = true
 			_game_over()
 	else:
-		card_field.flip_cards_to(false)
+		card_field.flip_cards_to(false, true)
 		if GameController.is_health_on:
 			health_points -= 1
 			lives_output.text = str(health_points)
@@ -71,6 +71,9 @@ func _start():
 
 func _game_over():
 	get_tree().change_scene_to_file(\"res://Scenes/game_end.tscn\")
+
+func _on_card_field_size_changed():
+	card_field.reset_cards()
 "
 
 [sub_resource type="GDScript" id="GDScript_tm4c6"]
@@ -166,7 +169,7 @@ size_flags_horizontal = 10
 text = "Вернуться назад"
 script = SubResource("GDScript_tm4c6")
 
-[node name="CardField" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+[node name="CardField" type="Container" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("2_qxufx")
