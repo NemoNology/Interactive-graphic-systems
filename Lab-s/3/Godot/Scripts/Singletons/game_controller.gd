@@ -4,7 +4,7 @@ const DEFAULT_IS_HEALTH_ON: bool = true
 const DEFAULT_IS_TIMER_ON: bool = false
 const DEFAULT_HEALTH_POINTS: int = 3
 const DEFAULT_GAME_TIME: int = 60
-const DEFAULT_PAIRS_COUNT: int = 16
+const DEFAULT_PAIRS_COUNT: int = 8
 
 var is_health_on: bool = DEFAULT_IS_HEALTH_ON
 var is_timer_on: bool = DEFAULT_IS_TIMER_ON
