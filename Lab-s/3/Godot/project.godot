@@ -10,11 +10,12 @@ config_version=5
 
 [application]
 
-config/name="Pairs remembering"
+config/name="Карты: запоминание"
+config/description="Игра для тех, кто хочет размять и улучшить память. Запоминайте расположение карт и их числовые обозначения, а затем по памяти находите пары карт с одинаковым значением, тем самым тренирую память."
 run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0.305882, 0.305882, 0.305882, 1)
-config/icon="res://Assets/Images/icon.svg"
+config/icon="res://Assets/Images/app-icon-256.svg"
 
 [autoload]
 
