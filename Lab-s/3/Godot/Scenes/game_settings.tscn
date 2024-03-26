@@ -222,7 +222,7 @@ text = "Настройки по умолчанию"
 
 [node name="Return" type="Button" parent="UI frame/Elements vbox/ButtonBox"]
 layout_mode = 2
-text = "Вернуться"
+text = "Вернуться в меню"
 script = SubResource("GDScript_sek5s")
 
 [connection signal="toggled" from="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/CheckBoxLifes" to="UI frame/Elements vbox/MarginContainer/MarginContainer/Settings/SpinBoxLifes" method="_on_check_box_lives_toggled"]
