@@ -7,6 +7,7 @@ const CARDS_SEPARATION_LENGTH: int = 8
 signal card_toogled(id: int, is_face_up: bool)
 
 func _ready():
+	item_rect_changed.connect(_update_cards_positions)
 	reset_cards()
 
 func _some_card_toogled(id: int, is_face_up: bool):
@@ -35,7 +36,7 @@ func _cards_fill_with_shufle():
 	for card in cards:
 		add_child(card)
 
-func flip_cards_to(to_state: bool, with_pause: bool = false):
+func flip_cards_to(to_state: bool, with_pause: bool=false):
 	var flipping_cards: Array[Card] = []
 	# Determinating what're cards needs to be flipped
 	for c: Card in get_children():
@@ -48,8 +49,8 @@ func flip_cards_to(to_state: bool, with_pause: bool = false):
 		c.toogle(false)
 
 func _update_cards_positions():
-	var current_width: int = CARDS_SEPARATION_LENGTH
-	var current_height: int = CARDS_SEPARATION_LENGTH
+	var current_width: float = CARDS_SEPARATION_LENGTH
+	var current_height: float = CARDS_SEPARATION_LENGTH
 	for c: Card in get_children():
 		c.position = Vector2(current_width, current_height)
 		current_width += c.size.x + CARDS_SEPARATION_LENGTH
